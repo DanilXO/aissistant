@@ -28,7 +28,7 @@ def run_simple_tts_stt_scenario():
 
     with Player() as player:
         data = tts.synthesize_into_bytes(
-            text="Привет! Я Ваш искусственный ассистент. Поработаем? Если хотите закончить, скажите: выход.",
+            text="Привет! Я Ваш личный ассистент. Поработаем? Если хотите закончить, скажите: выход.",
             config=tts_config)
         player.play_data(data, fps=tts_config.sample_rate)
 
