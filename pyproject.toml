@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "aissistant"
+version = "0.0.1"
+description = "Smart AI assistant. LLM + STT + TTS"
+authors = ["Фролов Даниил Дмитриевич <byka72@gmail.com>"]
+license = "GNU General Public License v3.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+torch = "^2.0.1"
+torchaudio = "^2.0.2"
+silero = "^0.4.1"
+PyAudio = "^0.2.13"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
