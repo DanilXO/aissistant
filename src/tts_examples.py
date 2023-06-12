@@ -19,7 +19,7 @@ def generate_tts_and_play():
         sample_rate=48000,
     )
     data = tts.recognize_to_bytes(
-        text='Карл у Клары украл кораллы, а Клара у Карла кларнет.')
+        text='Карл у Клары украл кораллы, а Клара у Карла кларнет.', config=tts_config)
 
     with Player() as player:
         player.play_data(data, fps=tts_config.sample_rate)
