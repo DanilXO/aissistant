@@ -27,14 +27,7 @@ pip3 install poetry
 poetry install
 ```
 
-5. Run examples:
-    
-    TTS:
-    ```commandline
-    poetry run python -m src.demo
-    ```
-   
-    Additional audio (record and play) adapters:
-    ```commandline
-    poetry run python -m  src.audio.examples
-    ```
+5. Run demo:
+```commandline
+   poetry run python -m src.demo
+```
