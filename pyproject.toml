@@ -12,6 +12,7 @@ torch = "^2.0.1"
 torchaudio = "^2.0.2"
 silero = "^0.4.1"
 PyAudio = "^0.2.13"
+speechrecognition = "^3.10.0"
 
 
 [build-system]

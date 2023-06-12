@@ -4,29 +4,36 @@ Implementation of a AI assistant consisting of STT (Silero - ?) + LLM(ChatGPT - 
 This is a "just for fun" non-commercial project.
 
 ## How to run it?
+1. Install used tools: flac
 
-1. Install Python 3.10+.
+For Mac OS (for example):
+```commandline
+brew install flac
+brew install portaudio
+```
 
-2. Install Poetry:
+2. Install Python 3.10+.
+
+3. Install Poetry:
 
 ```commandline
 pip3 install poetry
 ```
 
-3. Install libraries:
+4. Install libraries:
 
 ```commandline
 poetry install
 ```
 
-4. Run examples:
-
-    Audio (record and play) adapters:
-    ```commandline
-    poetry run python -m  src.audio.examples
-    ```
+5. Run examples:
     
     TTS:
     ```commandline
     poetry run python -m  src.tts_examples
+    ```
+   
+    Additional audio (record and play) adapters:
+    ```commandline
+    poetry run python -m  src.audio.examples
     ```

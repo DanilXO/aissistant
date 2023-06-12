@@ -48,7 +48,7 @@ class SSMLTTSConfig:
         return result
 
 
-class TTSAdapter:
+class SileroTTS:
 
     def __init__(self, model_file: Union[str, os.PathLike],
                  device_to_launch: AllowedDevices = AllowedDevices.CPU,
@@ -61,19 +61,19 @@ class TTSAdapter:
             model_file).load_pickle("tts_models", "model")
         self._model.to(torch.device(device_to_launch.value))
 
-    def recognize_to_bytes(self,
-                           text: str,
-                           config: Optional[Union[SimpleTTSConfig, SSMLTTSConfig]] = None) -> bytes:
+    def synthesize_into_bytes(self,
+                              text: str,
+                              config: Optional[Union[SimpleTTSConfig, SSMLTTSConfig]] = None) -> bytes:
         if config is None:
             config = SimpleTTSConfig()
 
         audio = self._model.apply_tts(text, **config.as_dict())
         return bytes((audio * 32767).numpy().astype('int16'))
 
-    def recognize_to_file(self,
-                          text: str,
-                          output_file: Union[str, os.PathLike] = "test.wav",
-                          config: Optional[Union[SimpleTTSConfig, SSMLTTSConfig]] = None) -> str:
+    def synthesize_into_file(self,
+                             text: str,
+                             output_file: Union[str, os.PathLike] = "test.wav",
+                             config: Optional[Union[SimpleTTSConfig, SSMLTTSConfig]] = None) -> str:
 
         if config is None:
             config = SimpleTTSConfig()
