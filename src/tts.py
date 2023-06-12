@@ -49,7 +49,6 @@ class SSMLTTSConfig:
 
 
 class TTSAdapter:
-    threads_count: int = 4
 
     def __init__(self, model_file: Union[str, os.PathLike],
                  device_to_launch: AllowedDevices = AllowedDevices.CPU,
