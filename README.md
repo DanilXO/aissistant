@@ -7,20 +7,26 @@ This is a "just for fun" non-commercial project.
 
 1. Install Python 3.10+.
 
-2. Install Poetry
+2. Install Poetry:
 
 ```commandline
 pip3 install poetry
 ```
 
-3. Run examples
+3. Install libraries:
 
-Audio record and play adapters:
 ```commandline
-poetry run python -m  src.audio.examples
+poetry install
 ```
 
-TTS:
-```commandline
-poetry run python -m  src.tts_examples
-```
+4. Run examples:
+
+    Audio (record and play) adapters:
+    ```commandline
+    poetry run python -m  src.audio.examples
+    ```
+    
+    TTS:
+    ```commandline
+    poetry run python -m  src.tts_examples
+    ```
