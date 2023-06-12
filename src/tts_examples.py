@@ -2,12 +2,16 @@ import os
 import pathlib
 
 from src.audio import Player
-from src.tts import SimpleTTSConfig, TTSAdapter, AllowedSpeakers
+from src.tts import SimpleTTSConfig, TTSAdapter, AllowedSpeakers, download_silero_tts_model
 
 
 def generate_tts_and_play():
     current_dir = pathlib.Path(__file__).parent.resolve()
+
+    pathlib.Path(os.path.join(current_dir, 'resources')).mkdir(parents=True, exist_ok=True)
+
     model_file = os.path.join(current_dir, 'resources', 'tts_sliero_v3.pt')
+    download_silero_tts_model(model_file)
 
     tts = TTSAdapter(model_file)
     tts_config = SimpleTTSConfig(
