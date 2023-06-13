@@ -3,17 +3,14 @@ from random import randint
 from src.audio import Player
 from src.settings import SETTINGS
 from src.stt import Recognizer
-from src.tts import SimpleTTSConfig, SileroTTS, AllowedSpeakers
+from src.tts import SimpleTTSConfig, SileroTTS
 
 
 def run_simple_tts_stt_scenario():
 
     tts = SileroTTS(SETTINGS.tts_model_path)
 
-    tts_config = SimpleTTSConfig(
-        speaker=AllowedSpeakers.Baya,
-        sample_rate=48000,
-    )
+    tts_config = SimpleTTSConfig(sample_rate=48000)
 
     is_over = False
     stop_words = ("выход", "закончить", "давай заканчивать", "конец")

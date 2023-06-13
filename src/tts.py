@@ -4,24 +4,31 @@ import os
 from typing import Any, Dict, Optional, Union
 import torch
 
+from src.settings import AllowedLanguages, SETTINGS
+
 
 class AllowedDevices(Enum):
-    CPU = 'cpu'
-    GPU = 'gpu'
+    CPU = "cpu"
+    GPU = "gpu"
 
 
-class AllowedSpeakers(Enum):
-    Aidar = 'aidar'
-    Baya = 'baya'
-    Kseniya = 'kseniya'
-    Xenia = 'xenia'
-    Eugene = 'eugene'
-    Random = 'random'
+class AllowedRUSpeakers(Enum):
+    Aidar = "aidar"
+    Baya = "baya"
+    Kseniya = "kseniya"
+    Xenia = "xenia"
+    Eugene = "eugene"
+    Random = "random"
+
+
+def get_speaker_by_language(language: AllowedLanguages) -> str:
+    if language is AllowedLanguages.RU:
+        return AllowedRUSpeakers.Baya.value
+    return "en_0"
 
 
 @dataclass
 class SimpleTTSConfig:
-    speaker: Optional[AllowedSpeakers] = AllowedSpeakers.Baya
     sample_rate: int = 48000
     put_accent: bool = True
     put_yo: bool = True
@@ -29,14 +36,13 @@ class SimpleTTSConfig:
 
     def as_dict(self) -> Dict[str, Any]:
         result = asdict(self)
-        result["speaker"] = result["speaker"].value
+        result["speaker"] = get_speaker_by_language(SETTINGS.language)
         return result
 
 
 @dataclass
 class SSMLTTSConfig:
     is_ssml: bool = False
-    speaker: Optional[AllowedSpeakers] = AllowedSpeakers.Baya
     sample_rate: int = 48000
     put_accent: bool = True
     put_yo: bool = True
@@ -44,7 +50,7 @@ class SSMLTTSConfig:
 
     def as_dict(self) -> Dict[str, Any]:
         result = asdict(self)
-        result["speaker"] = result["speaker"].value
+        result["speaker"] = get_speaker_by_language(SETTINGS.language)
         return result
 
 
@@ -68,7 +74,7 @@ class SileroTTS:
             config = SimpleTTSConfig()
 
         audio = self._model.apply_tts(text, **config.as_dict())
-        return bytes((audio * 32767).numpy().astype('int16'))
+        return bytes((audio * 32767).numpy().astype("int16"))
 
     def synthesize_into_file(self,
                              text: str,
