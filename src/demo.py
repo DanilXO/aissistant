@@ -1,20 +1,15 @@
-import os
-import pathlib
 from random import randint
 
 from src.audio import Player
+from src.settings import SETTINGS
 from src.stt import Recognizer
-from src.tts import SimpleTTSConfig, SileroTTS, AllowedSpeakers, download_silero_tts_model
-from src.utils import get_resources_path
+from src.tts import SimpleTTSConfig, SileroTTS, AllowedSpeakers
 
 
 def run_simple_tts_stt_scenario():
-    resources_dir = get_resources_path()
 
-    model_file = os.path.join(resources_dir, 'tts_sliero_v3.pt')
-    download_silero_tts_model(model_file)
+    tts = SileroTTS(SETTINGS.tts_model_path)
 
-    tts = SileroTTS(model_file)
     tts_config = SimpleTTSConfig(
         speaker=AllowedSpeakers.Baya,
         sample_rate=48000,

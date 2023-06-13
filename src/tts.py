@@ -79,9 +79,3 @@ class SileroTTS:
             config = SimpleTTSConfig()
 
         return self._model.save_wav(text, **config.as_dict(), audio_path=output_file)
-
-
-def download_silero_tts_model(output_model_file: Union[str, os.PathLike]):
-    if not os.path.isfile(output_model_file):
-        torch.hub.download_url_to_file('https://models.silero.ai/models/tts/ru/v3_1_ru.pt',
-                                       output_model_file)
