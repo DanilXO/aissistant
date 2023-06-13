@@ -5,14 +5,13 @@ from random import randint
 from src.audio import Player
 from src.stt import Recognizer
 from src.tts import SimpleTTSConfig, SileroTTS, AllowedSpeakers, download_silero_tts_model
+from src.utils import get_resources_path
 
 
 def run_simple_tts_stt_scenario():
-    current_dir = pathlib.Path(__file__).parent.resolve()
+    resources_dir = get_resources_path()
 
-    pathlib.Path(os.path.join(current_dir, 'resources')).mkdir(parents=True, exist_ok=True)
-
-    model_file = os.path.join(current_dir, 'resources', 'tts_sliero_v3.pt')
+    model_file = os.path.join(resources_dir, 'tts_sliero_v3.pt')
     download_silero_tts_model(model_file)
 
     tts = SileroTTS(model_file)
