@@ -15,7 +15,7 @@ class AllowedLanguages(Enum):
 
 
 class Settings(BaseSettings):
-    language: AllowedLanguages = Field(env="language", default=AllowedLanguages.RU)
+    language: AllowedLanguages = Field(env="language", default=AllowedLanguages.EN)
     resources_dir_name: str = Field(env="resources_dir_name", default="resources")
 
     language_models_map: Dict[str, Dict[AllowedLanguages, str]] = {

@@ -29,9 +29,15 @@ pip3 install poetry
 poetry install
 ```
 
-6. Set 'LANGUAGE' environment variable: 'RU' or 'EN' (RU by default)
+7. Compile locales translations:
 
-7. Run demo:
+```commandline
+pybabel compile -d locales
+```
+
+8. Set 'LANGUAGE' environment variable: 'ru_RU' or 'en_US' (en_US by default)
+
+9. Run demo:
 ```commandline
    poetry run python -m src.demo
 ```
