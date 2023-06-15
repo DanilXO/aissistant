@@ -40,7 +40,7 @@ def run_simple_tts_stt_scenario():
                 break
 
             data = tts.synthesize_into_bytes(
-                text="{}: {}".format(_("Did you say it?"), result),
+                text="{question}: {result}".format(question=_("Did you say it?"), result=result),
                 config=tts_config)
 
             player.play_data(data, fps=tts_config.sample_rate)
@@ -48,7 +48,8 @@ def run_simple_tts_stt_scenario():
             exclamation = exclamations[randint(0, len(exclamations) - 1)]
 
             data = tts.synthesize_into_bytes(
-                text="{}! {}".format(exclamation, _("Do you want to say me something else?")),
+                text="{exclamation}! {phrase}".format(exclamation=exclamation,
+                                                      phrase=_("Do you want to say me something else?")),
                 config=tts_config)
 
             player.play_data(data, fps=tts_config.sample_rate)
