@@ -1,3 +1,4 @@
+import json
 import os.path
 
 import speech_recognition
@@ -22,5 +23,9 @@ class Recognizer:
     def recognize(self) -> str:
         with speech_recognition.Microphone(device_index=0) as source:
             audio_data = self.engine.listen(source)
-
-        return self.engine.recognize_vosk(audio_data, language=SETTINGS.language)
+        recognized_result = self.engine.recognize_vosk(audio_data, language=SETTINGS.language)
+        try:
+            parsed_result = json.loads(recognized_result)
+            return parsed_result["text"]
+        except (KeyError, ValueError):
+            return recognized_result

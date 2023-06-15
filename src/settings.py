@@ -33,6 +33,7 @@ class Settings(BaseSettings):
     resources_dir_path: ComputedPath
     tts_model_path: ComputedPath
     stt_model_path: ComputedPath
+    translation_path: ComputedPath
 
     @root_validator
     def _init_computed_settings(cls, values: Dict[str, Any]) -> Dict[str, Any]:
@@ -48,6 +49,9 @@ class Settings(BaseSettings):
             if values.get("resources_dir_path", None) is None:
                 resources_dir_path = os.path.join(source_dir_path, values["resources_dir_name"])
                 values["resources_dir_path"] = resources_dir_path
+
+            if values.get("translation_path", None) is None:
+                values["translation_path"] = os.path.join(resources_dir_path, "translation.csv")
 
             values.update(cls._load_language_models_configs(language, language_models_map, resources_dir_path))
 
