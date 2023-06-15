@@ -13,7 +13,6 @@ class Recognizer:
         self.engine = speech_recognition.Recognizer()
         self.engine.pause_threshold = 0.5
         self.engine.non_speaking_duration = 0.3
-        print(SETTINGS.stt_model_path)
         self.engine.vosk_model = Model(
             model_path=SETTINGS.stt_model_path,
             model_name=os.path.basename(SETTINGS.stt_model_path),

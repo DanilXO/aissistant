@@ -3,7 +3,7 @@ from random import randint
 from src.audio import Player
 from src.settings import SETTINGS
 from src.stt import Recognizer
-from src.translator import get_text as _
+from translator import gettext as _
 from src.tts import SimpleTTSConfig, SileroTTS
 
 
@@ -14,13 +14,13 @@ def run_simple_tts_stt_scenario():
     tts_config = SimpleTTSConfig(sample_rate=48000)
 
     is_over = False
-    stop_words = (_("выход"), _("закончить"), _("давай заканчивать"), _("конец"))
+    stop_words = (_("exit"), _("finish"), _("let's finish"), _("the end"))
     recognizer = Recognizer()
-    exclamations = (_("Здорово"), _("Супер"), _("Чудненько"), _("Потрясно"), _("Хорошо"), _("Славно"))
+    exclamations = (_("Great"), _("Super"), _("Nice"), _("Awesome"), _("Fine"))
 
     with Player() as player:
         data = tts.synthesize_into_bytes(
-            text=_("Привет! Я Ваш личный ассистент. Поработаем? Если хотите закончить, скажите: выход."),
+            text=_("Hello! I am your personal assistant. Let's work? If you want to end, say 'exit'."),
             config=tts_config)
         player.play_data(data, fps=tts_config.sample_rate)
 
@@ -30,7 +30,7 @@ def run_simple_tts_stt_scenario():
             for stop_word in stop_words:
                 if stop_word in result:
                     data = tts.synthesize_into_bytes(
-                        text=_("Я услышала, что вы хотите закончить наше общение. Всего хорошего!"),
+                        text=_("I heard that you want to end our communication. Best wishes!"),
                         config=tts_config)
                     is_over = True
                     player.play_data(data, fps=tts_config.sample_rate)
@@ -40,7 +40,7 @@ def run_simple_tts_stt_scenario():
                 break
 
             data = tts.synthesize_into_bytes(
-                text="{}: {}".format(_("Вы сказали?"), result),
+                text="{}: {}".format(_("Did you say it?"), result),
                 config=tts_config)
 
             player.play_data(data, fps=tts_config.sample_rate)
@@ -48,7 +48,7 @@ def run_simple_tts_stt_scenario():
             exclamation = exclamations[randint(0, len(exclamations) - 1)]
 
             data = tts.synthesize_into_bytes(
-                text="{}! {}".format(exclamation, _("Скажите еще что-нибудь?")),
+                text="{}! {}".format(exclamation, _("Do you want to say me something else?")),
                 config=tts_config)
 
             player.play_data(data, fps=tts_config.sample_rate)

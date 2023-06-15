@@ -18,6 +18,10 @@ vosk = "0.3.44"
 pydantic = "^1.10.9"
 
 
+[tool.poetry.group.dev.dependencies]
+six = "^1.16.0"
+babel = "^2.12.1"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

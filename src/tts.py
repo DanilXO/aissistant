@@ -72,7 +72,6 @@ class SileroTTS:
                               config: Optional[Union[SimpleTTSConfig, SSMLTTSConfig]] = None) -> bytes:
         if config is None:
             config = SimpleTTSConfig()
-
         audio = self._model.apply_tts(text, **config.as_dict())
         return bytes((audio * 32767).numpy().astype("int16"))
 

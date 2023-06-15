@@ -10,8 +10,8 @@ ComputedPath = Optional[Union[str, Path, os.PathLike]]
 
 
 class AllowedLanguages(Enum):
-    EN = "en"
-    RU = "ru"
+    EN = "en_US"
+    RU = "ru_RU"
 
 
 class Settings(BaseSettings):
@@ -34,13 +34,15 @@ class Settings(BaseSettings):
     tts_model_path: ComputedPath
     stt_model_path: ComputedPath
     translation_path: ComputedPath
+    locales_path: ComputedPath
 
     @root_validator
     def _init_computed_settings(cls, values: Dict[str, Any]) -> Dict[str, Any]:
         source_dir_path = ""
         resources_dir_path = ""
-        language = values.get("language", AllowedLanguages.RU)
+        language: AllowedLanguages = values.get("language", AllowedLanguages.RU)
         language_models_map = values.get("language_models_map", {})
+
         try:
             if values.get("source_dir_path", None) is None:
                 source_dir_path = pathlib.Path(__file__).parent.parent.resolve()
@@ -52,6 +54,10 @@ class Settings(BaseSettings):
 
             if values.get("translation_path", None) is None:
                 values["translation_path"] = os.path.join(resources_dir_path, "translation.csv")
+
+            if values.get("locales_path", None) is None:
+                values["locales_path"] = os.path.join(source_dir_path, "locales", language.value, "LC_MESSAGES",
+                                                      "messages.mo")
 
             values.update(cls._load_language_models_configs(language, language_models_map, resources_dir_path))
 
